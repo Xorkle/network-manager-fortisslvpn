@@ -2,9 +2,9 @@ AC_PREREQ(2.59)
 
 AC_INIT(NetworkManager-fortisslvpn,
         1.2.9,
-        https://bugzilla.gnome.org/enter_bug.cgi?product=NetworkManager,
+        https://gitlab.gnome.org/GNOME/NetworkManager-fortisslvpn/issues,
         NetworkManager-fortisslvpn)
-AM_INIT_AUTOMAKE([1.9 foreign no-dist-gzip dist-xz])
+AM_INIT_AUTOMAKE([1.9 no-dist-gzip dist-xz -Wno-portability])
 AM_MAINTAINER_MODE
 AM_SILENT_RULES([yes])
 
@@ -20,6 +20,18 @@ AM_PROG_CC_C_O
 AC_PROG_INSTALL
 AC_PROG_LIBTOOL
 AC_PATH_PROG(GLIB_COMPILE_RESOURCES, glib-compile-resources)
+
+AC_GNU_SOURCE
+
+AC_CHECK_PROG([has_file], file, yes, no)
+if test x$has_file = xno ; then
+    AC_MSG_ERROR(["file" utility not found.])
+fi
+
+AC_CHECK_PROG([has_find], find, yes, no)
+if test x$has_find = xno ; then
+    AC_MSG_ERROR(["find" utility not found.])
+fi
 
 dnl
 dnl Required headers
@@ -62,7 +74,7 @@ dnl
 dnl GNOME support
 dnl
 AC_ARG_WITH(gnome, AS_HELP_STRING([--without-gnome], [Build NetworkManager-fortisslvpn without GNOME support, e.g. vpn service only]), [], [with_gnome_specified=no])
-AC_ARG_WITH(libnm-glib, AS_HELP_STRING([--without-libnm-glib], [Build NetworkManager-fortisslvpn without libnm-glib comatibility]), [], [with_libnm_glib_specified=no])
+AC_ARG_WITH(libnm-glib, AS_HELP_STRING([--with-libnm-glib], [Build NetworkManager-fortisslvpn with libnm-glib comatibility (depreacted)]), [], [with_libnm_glib_specified=no])
 if test "$with_libnm_glib_specified" != no -a "$with_libnm_glib" != no; then
 	if test "$with_gnome_specified" != no -a "$with_gnome" == no; then
 		AC_MSG_ERROR(Building --with-libnm-glib conflicts with --without-gnome)
@@ -72,10 +84,10 @@ if test "$with_gnome" != no; then
 	with_gnome=yes
 fi
 if test "$with_libnm_glib_specified" == no; then
-	with_libnm_glib="$with_gnome"
+	with_libnm_glib=no
 fi
-if test "$with_libnm_glib" != no; then
-	with_libnm_glib=yes
+if test "$with_libnm_glib" != yes; then
+	with_libnm_glib=no
 fi
 AM_CONDITIONAL(WITH_GNOME, test "$with_gnome" != no)
 AM_CONDITIONAL(WITH_LIBNM_GLIB, test "$with_libnm_glib" != no)

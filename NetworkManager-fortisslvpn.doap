@@ -5,14 +5,14 @@
          xmlns:gnome="http://api.gnome.org/doap-extensions#"
          xmlns="http://usefulinc.com/ns/doap#">
 
-  <name xml:lang="en">network-manager-fortisslvpn</name>
+  <name xml:lang="en">NetworkManager-fortisslvpn</name>
   <shortdesc xml:lang="en">Fortinet compatible SSLVPN support for NetworkManager</shortdesc>
   <description xml:lang="en">SSLVPN support for NetworkManager. Compatible with FortiOS servers.</description>
 
   <homepage rdf:resource="https://wiki.gnome.org/Projects/NetworkManager" />
   <mailing-list rdf:resource="http://mail.gnome.org/mailman/listinfo/networkmanager-list" />
   <download-page rdf:resource="http://download.gnome.org/sources/NetworkManager-fortisslvpn/" />
-  <bug-database rdf:resource="https://bugzilla.gnome.org/browse.cgi?product=NetworkManager&amp;component=VPN:%20fortisslvpn" />
+  <bug-database rdf:resource="https://gitlab.gnome.org/GNOME/NetworkManager-fortisslvpn/issues" />
   <category rdf:resource="http://api.gnome.org/doap-extensions#apps" />
   <programming-language>C</programming-language>
 
@@ -39,8 +39,8 @@
   </maintainer>
   <maintainer>
     <foaf:Person>
-      <foaf:name>Francesco Guidici</foaf:name>
-      <foaf:mbox rdf:resource="mailto:fguidici@redhat.com" />
+      <foaf:name>Francesco Giudici</foaf:name>
+      <foaf:mbox rdf:resource="mailto:fgiudici@redhat.com" />
       <gnome:userid>fgiudici</gnome:userid>
     </foaf:Person>
   </maintainer>
